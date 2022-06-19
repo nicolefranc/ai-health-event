@@ -9,10 +9,10 @@ device = torch.device('cpu')
 def predict(tweet):
 
     tokenizer = AutoTokenizer.from_pretrained(
-        'dibsondivya/distilbert-phm-tweets')
+        'dibsondivya/ernie-phmtweets-sutd')
 
     model = AutoModelForSequenceClassification.from_pretrained(
-        'dibsondivya/distilbert-phm-tweets')
+        'dibsondivya/ernie-phmtweets-sutd')
 
     # Tokenize inputs
     inputs = tokenizer(tweet, padding=True, truncation=True, return_tensors="pt").to(
