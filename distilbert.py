@@ -6,7 +6,7 @@ import math
 import requests
 
 
-def predict():
+def predict(tweet):
 
     API_URL = "https://api-inference.huggingface.co/models/dibsondivya/distilbert-phmtweets-sutd"
     headers = {"Authorization": "Bearer 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"}
@@ -18,7 +18,7 @@ def predict():
     output = query({
         "inputs": "I like you. I love you",
     })[0]
-    # print(output)
+    print(output)
 
     max_score = max(label['score'] for label in output)
 
@@ -28,7 +28,7 @@ def predict():
         if s == max_score:
             pred = l[-1]
 
-    # print(pred)
+    print(pred)
     return pred
 
 
@@ -79,6 +79,3 @@ def convert_label(label):
         return 'OTHER MENTION'
     elif label == 3:
         return 'SELF-MENTION'
-
-
-print(predict())
