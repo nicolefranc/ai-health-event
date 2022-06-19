@@ -20,13 +20,16 @@ def index():
 
 @app.route('/output', methods=['POST'])
 def output():
+    print(request.form)
+    input_model = request.form['input_model']
     input_text = request.form['input_text']
     # iterate through series of actions
-    label = input_text
-    predicted_label = predict(label)
+    predicted_label = predict(input_model, input_text)
     predicted_label = convert_label(predicted_label)
-    out = f'The tweet is categorised as {predicted_label.upper()}.'
-    return jsonify({'htmlresponse': out})
+    # out = f'The tweet is categorised as {predicted_label.upper()}.'
+    out = jsonify({'text': input_text, 'prediction': predicted_label})
+    print('out', out)
+    return out
 
 
 # main driver function

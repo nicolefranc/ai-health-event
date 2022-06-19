@@ -6,9 +6,11 @@ import math
 import requests
 
 
-def predict(tweet):
+def predict(model, tweet):
+    API_URL = "https://api-inference.huggingface.co/models/dibsondivya/ernie-phmtweets-sutd"
+    if model == 'distilbert':
+        API_URL = "https://api-inference.huggingface.co/models/dibsondivya/distilbert-phmtweets-sutd"
 
-    API_URL = "https://api-inference.huggingface.co/models/dibsondivya/distilbert-phmtweets-sutd"
     headers = {"Authorization": "Bearer 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"}
 
     def query(payload):
@@ -17,8 +19,9 @@ def predict(tweet):
 
     output = query({
         "inputs": tweet,
-    })[0]
+    })
     print(output)
+    output = output[0]
 
     max_score = max(label['score'] for label in output)
 

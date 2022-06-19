@@ -4,63 +4,108 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tweeet Classification</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Classification for PHM</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 <body>
-    <div class="container-fluid" id="explainerdiv" style="margin-bottom: 10px; background-color: azure; text-align: center; margin-left: 10%; margin-right: 10%;">
-        <div class="row">
-            <h2>   Welcome to our GUI</h2>
-        </div> 
-        
-    </br>
-    <div class="row">
-        <h6>    Insert information on why we are fun to use</h6>
-    </div> 
-    </div>
+    <div class="flex flex-col items-center py-20">
+        <div class="max-w-2xl">
+            <h1 class="font-sans font-bold text-3xl">Text Classification for Personal Health Mention</h1>
+            <p>
+                This application classifies user input tweets into their relevant health event groups. The ERNIE 2.0 model used for classification has been trained on data found from an Emory University Study on Detection of Personal Health Mentions in Social Media paper, and fine-tuned to perform with 88.5% accuracy.
+            </p>
+        </div>
 
-    <div id="inputdiv" style="background-color:cornsilk; padding: 5px; border-radius: 25px; margin-left: 10%; margin-right: 10%;">
-        <form class="form-horizontal" style="text-align: center; align-items: center;">
-            <div class="form-group">
-                <label for="input_text">Tweet</label>
-                <div class="row d-flex justify-content-center">
-                <!--textarea class="form-control" id="exampleFormControlTextarea1" type="text" rows="3" aria-describedby="inputHelpBlock" pattern="[a-zA-Z'-'\s]*" required></textarea-->
-                    <input type="text" id="input_text" class="form-control .form-control-lg" aria-describedby="inputHelpBlock" style="width: 75%; align-items: center;" pattern="[a-zA-Z'-'\s]*" required>
+        <div class="block p-6 mt-10 rounded-md shadow-lg bg-white w-full max-w-2xl">
+            <form>
+              <div class="form-group mb-6">
+                <!-- <label for="input_text" class="form-label inline-block mb-2 text-gray-700">Text</label> -->
+                <input type="text" class="form-control block
+                  w-full
+                  px-3
+                  py-1.5
+                  text-base
+                  font-normal
+                  text-gray-700
+                  bg-white bg-clip-padding
+                  border border-solid border-gray-300
+                  rounded
+                  transition
+                  ease-in-out
+                  m-0
+                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="input_text"
+                  placeholder="Enter text to classify">
+              </div>
+              <div class="flex flex-col justify-between mb-6">
+                <h2 class="uppercase text-sm font-medium">Select a model:</h2>
+                <div class="form-group form-check my-2">
+                    <!-- <label class="form-check-label inline-block text-gray-800" for="radio_distilbert">DistilBERT</label> -->
+                    <input type="radio" name="input_model" id="distilbert" value="distilbert"
+                        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-xl bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer">DistilBERT</input>
+                    <input type="radio" name="input_model" id="ernie" value="ernie"
+                        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-xl bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mx-2 cursor-pointer">Ernie</input>
+                    <!-- <input type="radio" name="input_model" id="radio_distilbert" value="distilbert"
+                        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-xl bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer">
+                    <input type="radio" name="input_model" id="radio_ernie" value="ernie"
+                        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-xl bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"> -->
+                    <!-- <label class="form-check-label inline-block text-gray-800" for="radio_ernie">Ernie</label> -->
                 </div>
-                <small id="inputHelpBlock" class="form-text text-muted">
-                Your tweet must not contain numbers, special characters or emojis.
-                </small>
+              </div>
+              <button type="submit" class="
+                w-full
+                px-6
+                py-2.5
+                bg-blue-600
+                text-white
+                font-medium
+                text-xs
+                leading-tight
+                uppercase
+                rounded
+                shadow-md
+                hover:bg-blue-700 hover:shadow-lg
+                focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+                active:bg-blue-800 active:shadow-lg
+                transition
+                duration-150
+                ease-in-out">Classify</button>
+            </form>
+        </div>
+
+        <div id="result" class="block p-6 mt-10 rounded-md shadow-lg bg-white w-full max-w-2xl">
+            <h2 class="uppercase text-sm font-medium">Result:</h2>
+            <div>
+                <p>The text <span id="text" class="italic"></span>
+                is categorised as <span id="prediction" class="text-lg font-semibold text-blue-600"></span>.
+                </p>
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+        </div>
     </div>
-
-        <div id="successAlert" class="alert alert-success" role="alert" style="display:none;"></div>
-        <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
-
-
-    <div id="outputdiv" style="padding: 5px; border-radius: 25px; margin-left: 10%; margin-right: 10%; margin-top: 10px; display:hide;"></div>
-    
     <script>
-$(document).ready(function() {
-    $('form').on('submit', function(event) {
-        $.ajax({
-            data : {
-                input_text : $('#input_text').val(),
-            },
-            type : 'POST',
-            url : '/output'
-        })
-        .done(function(data) {
-            $('#outputdiv').text(data.htmlresponse).show();
+        $(document).ready(function() {
+            $('#result').hide()
+            $('form').on('submit', function(event) {
+                $.ajax({
+                    data : {
+                        input_text : $('#input_text').val(),
+                        input_model: $('input[name="input_model"]:checked').val()
+                    },
+                    type : 'POST',
+                    url : '/output'
+                })
+                .done(function(data) {
+                    $('#tweet').text(data.text)
+                    $('#prediction').text(data.prediction)
+                    $('#result').show()
+                });
+                event.preventDefault();
+            });
         });
-        event.preventDefault();
-    });
-});
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 </body>
