@@ -25,7 +25,7 @@ def output():
     label = input_text
     predicted_label = predict(label)
     predicted_label = convert_label(predicted_label)
-    out = f'The tweet is a(n) {predicted_label.upper()}.'
+    out = f'The tweet is categorised as {predicted_label.upper()}.'
     return jsonify({'htmlresponse': out})
 
 
