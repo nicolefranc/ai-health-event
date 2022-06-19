@@ -6,7 +6,7 @@ import math
 import requests
 
 
-def predict():
+def predict(tweet):
 
     API_URL = "https://api-inference.huggingface.co/models/dibsondivya/distilbert-phmtweets-sutd"
     headers = {"Authorization": "Bearer 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"}
