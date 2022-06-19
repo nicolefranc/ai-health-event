@@ -16,7 +16,7 @@ def predict(tweet):
         return response.json()
 
     output = query({
-        "inputs": "I like you. I love you",
+        "inputs": tweet,
     })[0]
     print(output)
 
