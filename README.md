@@ -9,6 +9,11 @@ Tweets were labelled with 4 main classes:
 
 ![telegram-cloud-document-5-6161174884404692339](https://user-images.githubusercontent.com/56643379/174519836-426cb6fd-9094-4f62-a2bc-b165ffc0dcc7.jpg)
 
+## Setup Instructions
+To run the application, clone the repository and run the following command on the terminal:
+```bash
+python3 app.py
+```
 
 
 ## App Usage
